@@ -27,12 +27,27 @@ const CatalogStyle = new StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgba(220, 218, 218, 0.72)',
+    padding: 10,
+  },
+  flatListContainer: {
+    flex: 1,
+  },
+  contentContainerStyle: {
+    alignItems: 'center',
   },
 });
 
 const CardStyle = new StyleSheet.create({
   container: {
-    borderWidth: 1,
+    width: 90,
+    alignItems: 'center',
+    margin: 10,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    padding: 5,
+  },
+  imageContainer: {
+    alignItems: 'center',
   },
 });
 

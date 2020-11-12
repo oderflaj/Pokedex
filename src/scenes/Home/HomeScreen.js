@@ -8,7 +8,7 @@ export default ({navigation}) => {
   return (
     <>
       <Search />
-      <Catalog />
+      <Catalog navigation={navigation} />
       {/*
       <Button
         title="Presioname"

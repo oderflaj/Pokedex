@@ -10,6 +10,8 @@ export const LanguageCatalog = {
     Speed: 'Speed',
     Sp_Atk: 'Sp Atk',
     Sp_Def: 'Sp Def',
+    Error: 'Error',
+    Information: 'Information',
   },
   es_MX: {
     Search: 'Buscar',
@@ -22,6 +24,8 @@ export const LanguageCatalog = {
     Speed: 'Velocidad',
     Sp_Atk: 'Vel Atq',
     Sp_Def: 'Vel Def',
+    Error: 'Error',
+    Information: 'Información',
   },
 
   es_US: {
@@ -35,6 +39,8 @@ export const LanguageCatalog = {
     Speed: 'Velocidad',
     Sp_Atk: 'Vel Atq',
     Sp_Def: 'Vel Def',
+    Error: 'Error',
+    Information: 'Information',
   },
 
   es_ES: {
@@ -48,5 +54,7 @@ export const LanguageCatalog = {
     Speed: 'Velocidad',
     Sp_Atk: 'Vel Atq',
     Sp_Def: 'Vel Def',
+    Error: 'Error',
+    Information: 'Información',
   },
 };
