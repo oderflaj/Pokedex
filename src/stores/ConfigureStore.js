@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import {Language} from './Languages/reducer';
+import reducerLanguageApp from './Languages/reducer';
 
-const combine = combineReducers({Language});
+const combine = combineReducers({reducerLanguageApp});
 
 export default combine;

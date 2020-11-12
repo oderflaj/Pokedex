@@ -4,9 +4,7 @@ import Search from './components/Search';
 import Catalog from './components/Catalog';
 
 export default ({navigation}) => {
-  useEffect(() => {
-    console.log(navigation);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <Search />

@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {StatusBar} from 'react-native';
+import React, {useEffect} from 'react';
+import {StatusBar, NativeModules, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -22,9 +22,22 @@ import Header from './src/components/Header/Header';
 import HomeScreen from './src/scenes/Home/HomeScreen';
 import DetailScreen from './src/scenes/Detail/DetailScreen';
 
+//Settings
+import {setLanguage} from './src/stores/Languages/actions';
+
 const Stack = createStackNavigator();
 
 const App: () => React$Node = () => {
+  const deviceLanguage =
+    Platform.OS === 'ios'
+      ? NativeModules.SettingsManager.settings.AppleLocale ||
+        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+      : NativeModules.I18nManager.localeIdentifier;
+
+  useEffect(() => {
+    store.dispatch(setLanguage(deviceLanguage));
+  }, [0]);
+
   return (
     <>
       <StatusBar barStyle="light-content" />
