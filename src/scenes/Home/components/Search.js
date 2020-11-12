@@ -1,18 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
 import {SearchStyle} from '../style';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import * as SearchActions from '../../../stores/Catalog/actions';
 
-const Search = ({languageCatalog}) => {
+const Search = ({languageCatalog, actions}) => {
   const [searchText, setSearchText] = useState('');
   const [showClear, setShowClear] = useState(false);
 
   const lookForPokemon = (pokeName) => {
-    setSearchText(pokeName);
+    setSearchText(pokeName.trim());
     if (pokeName.length > 0) {
+      actions.setSearchItem(pokeName);
       setShowClear(true);
     } else {
+      actions.setSearchItem('');
       setShowClear(false);
     }
   };
@@ -67,6 +71,7 @@ const Search = ({languageCatalog}) => {
             title={languageCatalog.Cancel}
             onPress={() => {
               setSearchText('');
+              actions.setSearchItem('');
               setShowClear(false);
             }}
           />
@@ -79,8 +84,11 @@ const Search = ({languageCatalog}) => {
 };
 
 const mapStateToProps = (state) => ({
-  //language: state.reducerLanguageApp.language,
   languageCatalog: state.reducerLanguageApp.languageCatalog,
 });
 
-export default connect(mapStateToProps)(Search);
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(SearchActions, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

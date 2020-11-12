@@ -23,4 +23,17 @@ const SearchStyle = new StyleSheet.create({
   },
 });
 
-export {SearchStyle};
+const CatalogStyle = new StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(220, 218, 218, 0.72)',
+  },
+});
+
+const CardStyle = new StyleSheet.create({
+  container: {
+    borderWidth: 1,
+  },
+});
+
+export {SearchStyle, CatalogStyle, CardStyle};

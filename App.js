@@ -41,7 +41,6 @@ const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
