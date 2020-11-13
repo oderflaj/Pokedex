@@ -5,6 +5,7 @@ export const DetailStyle = new StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 20,
+    justifyContent: 'flex-start',
   },
   containerGeneral: {
     width: '80%',
@@ -12,8 +13,12 @@ export const DetailStyle = new StyleSheet.create({
   baseInformation: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   textColor: {
     color: '#6B6F6F',
+  },
+  containerStats: {
+    alignItems: 'center',
   },
 });

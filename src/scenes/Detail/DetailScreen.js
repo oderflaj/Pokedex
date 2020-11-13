@@ -131,12 +131,21 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
           ]}>
           {description}
         </Text>
-        <Text>{detail.hp}</Text>
-        <Text>{detail.attack}</Text>
-        <Text>{detail.defense}</Text>
-        <Text>{detail.speed}</Text>
-        <Text>{detail['special-attack']}</Text>
-        <Text>{detail['special-defense']}</Text>
+        <View style={DetailStyle.containerStats}>
+          <Text
+            style={[
+              DetailStyle.textColor,
+              {fontSize: 9, fontWeight: 'bold', marginBottom: 15},
+            ]}>
+            S T A T I S T I C S
+          </Text>
+          <Text>{detail.hp}</Text>
+          <Text>{detail.attack}</Text>
+          <Text>{detail.defense}</Text>
+          <Text>{detail.speed}</Text>
+          <Text>{detail['special-attack']}</Text>
+          <Text>{detail['special-defense']}</Text>
+        </View>
       </View>
     </View>
   );
