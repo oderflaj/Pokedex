@@ -12,6 +12,7 @@ export const LanguageCatalog = {
     Sp_Def: 'Sp Def',
     Error: 'Error',
     Information: 'Information',
+    Not_Found_Pokemon: 'Not Found Pokemon...',
   },
   es_MX: {
     Search: 'Buscar',
@@ -26,6 +27,7 @@ export const LanguageCatalog = {
     Sp_Def: 'Vel Def',
     Error: 'Error',
     Information: 'Información',
+    Not_Found_Pokemon: 'No se encontro Pokemon...',
   },
 
   es_US: {
@@ -41,6 +43,7 @@ export const LanguageCatalog = {
     Sp_Def: 'Vel Def',
     Error: 'Error',
     Information: 'Information',
+    Not_Found_Pokemon: 'Not found Pokemon...',
   },
 
   es_ES: {
@@ -56,5 +59,6 @@ export const LanguageCatalog = {
     Sp_Def: 'Vel Def',
     Error: 'Error',
     Information: 'Información',
+    Not_Found_Pokemon: 'No se encontro Pokemon...',
   },
 };

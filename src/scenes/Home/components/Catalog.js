@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, ActivityIndicator, FlatList} from 'react-native';
+import React, {useEffect, useState, useRef} from 'react';
+import {View, ActivityIndicator, FlatList, Text} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CatalogStyle} from '../style';
 import {connect} from 'react-redux';
@@ -7,14 +7,21 @@ import * as Service from '../../../services/Services';
 import Card from './Card';
 import Message from '../../../components/Message/Message';
 
-const Catalog = ({searchItem, navigation}) => {
+const Catalog = ({searchItem, navigation, languageCatalog}) => {
   const [loading, setLoading] = useState(true);
   const [initialCatalog, setInitialCatalog] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
+  const [indexPage, setIndexPage] = useState(Service.PAGINATION);
+  const [loadingPage, setLoadingPage] = useState(false);
+
+  const unmounted = useRef(false);
 
   useEffect(() => {
     getData();
+    return () => {
+      unmounted.current = true;
+    };
   }, []);
 
   const getData = async () => {
@@ -48,12 +55,6 @@ const Catalog = ({searchItem, navigation}) => {
     }
   };
 
-  //Get Data for details
-  /*
-  if (initialCatalog.length > 0) {
-    Service.getDataDetails(initialCatalog);
-  }*/
-
   const getMessage = () => {
     return <Message type={'error'} message={message} />;
   };
@@ -65,14 +66,34 @@ const Catalog = ({searchItem, navigation}) => {
       ? initialCatalog.filter((pokemon) => {
           return pokemon.name.toLowerCase().includes(search);
         })
-      : initialCatalog;
+      : initialCatalog.slice(0, indexPage);
+  };
+
+  const handleLoadMorePokemons = () => {
+    setLoadingPage(true);
+    let index = indexPage + Service.PAGINATION;
+    if (index > initialCatalog.length) {
+      setIndexPage(initialCatalog.length - 1);
+    } else {
+      setIndexPage(index);
+    }
+    setLoadingPage(false);
   };
 
   const renderItem = ({item}) => (
     <Card pokemon={item} navigation={navigation} />
   );
 
-  //maxToRenderPerBatch
+  const renderFooter = () => {
+    return loadingPage ? (
+      <View style={{width: 30, height: 30, margin: 30}}>
+        <ActivityIndicator size="small" color="red" />
+      </View>
+    ) : (
+      <></>
+    );
+  };
+
   return showMessage ? (
     getMessage()
   ) : loading ? (
@@ -92,16 +113,22 @@ const Catalog = ({searchItem, navigation}) => {
         keyExtractor={(item) => item.id}
         numColumns={3}
         style={CatalogStyle.flatListContainer}
-        onScrollEndDrag={() => console.log(' *********end')}
+        onScrollEndDrag={() => handleLoadMorePokemons()}
         onScrollBeginDrag={() => console.log(' *******start')}
-        initialNumToRender={8}
-        maxToRenderPerBatch={2}
         onEndReachedThreshold={0.5}
+        ListFooterComponent={() => renderFooter()}
+        ListEmptyComponent={() => (
+          <>
+            <Text>{languageCatalog.Not_Found_Pokemon}</Text>
+          </>
+        )}
       />
     </View>
   );
 };
 const mapStateToProps = (state) => ({
   searchItem: state.reducerCatalog.searchItem,
+  language: state.reducerLanguageApp.language,
+  languageCatalog: state.reducerLanguageApp.languageCatalog,
 });
 export default connect(mapStateToProps)(Catalog);

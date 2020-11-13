@@ -4,9 +4,7 @@ import {CardStyle} from '../style';
 import {PokeAPI} from '../../../services/Services';
 
 export default ({pokemon, navigation}) => {
-  //console.log(navigation);
-  const [imageUrl, setImageUrl] = useState('');
-  const [flagImageUrl, setFlagImageUrl] = useState(false);
+  const [flagImage, setFlagImage] = useState(false);
 
   useEffect(() => {}, [0]);
 

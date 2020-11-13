@@ -12,6 +12,8 @@ export const PokeAPI = {
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png',
 };
 
+export const PAGINATION = 50;
+
 export const getCountPokemon = async () => {
   try {
     let url = PokeAPI.GET_LIST;

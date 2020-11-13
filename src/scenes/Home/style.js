@@ -28,12 +28,16 @@ const CatalogStyle = new StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(220, 218, 218, 0.72)',
     padding: 10,
+    alignItems: 'center',
   },
   flatListContainer: {
     flex: 1,
   },
   contentContainerStyle: {
     alignItems: 'center',
+  },
+  pokeball: {
+    borderWidth: 1,
   },
 });
 
