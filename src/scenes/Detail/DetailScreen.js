@@ -1,9 +1,10 @@
 import React, {useState, useLayoutEffect, useRef} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import {DetailStyle} from './style';
 import {PokeAPI} from '../../services/Services';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import ChartBar from '../../components/ChartBar/ChartBar';
 
 const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   const pokemon = route.params.pokemon;
@@ -95,59 +96,111 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   }, []);
 
   return (
-    <View style={DetailStyle.container}>
-      <View style={DetailStyle.containerGeneral}>
-        <View style={DetailStyle.baseInformation}>
-          <View>
-            <Image
-              source={{uri: PokeAPI.GET_IMAGE.replace('{id}', pokemon.id)}}
-              style={{width: 140, height: 140}}
-            />
+    <ScrollView>
+      <View style={DetailStyle.container}>
+        <View style={DetailStyle.containerGeneral}>
+          <View style={DetailStyle.baseInformation}>
+            <View style={DetailStyle.containerImage}>
+              <Image
+                source={{uri: PokeAPI.GET_IMAGE.replace('{id}', pokemon.id)}}
+                style={{width: 120, height: 120}}
+              />
+            </View>
+            <View style={DetailStyle.containerText}>
+              <Text style={[DetailStyle.textColor, {fontSize: 9}]}>
+                {pokemon.id.length < 3
+                  ? '#' + `00${pokemon.id}`.substr(-1 + pokemon.id.length)
+                  : `#${pokemon.id}`}
+              </Text>
+              <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                {pokemon.name}
+              </Text>
+              <Text
+                style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
+                <Text style={{fontWeight: 'bold'}}>{`Height: `}</Text>
+                {detail.height}m
+              </Text>
+              <Text
+                style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
+                <Text style={{fontWeight: 'bold'}}>{`Weight: `}</Text>
+                {detail.weight}kg
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={[DetailStyle.textColor, {fontSize: 9}]}>
-              {pokemon.id.length < 3
-                ? '#' + `00${pokemon.id}`.substr(-1 + pokemon.id.length)
-                : `#${pokemon.id}`}
-            </Text>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-              {pokemon.name}
-            </Text>
-            <Text style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
-              <Text style={{fontWeight: 'bold'}}>{`Height: `}</Text>
-              {detail.height}m
-            </Text>
-            <Text style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
-              <Text style={{fontWeight: 'bold'}}>{`Weight: `}</Text>
-              {detail.weight}kg
-            </Text>
-          </View>
-        </View>
 
-        <Text
-          style={[
-            DetailStyle.textColor,
-            {marginTop: 5, marginBottom: 25, textAlign: 'center'},
-          ]}>
-          {description}
-        </Text>
-        <View style={DetailStyle.containerStats}>
           <Text
             style={[
               DetailStyle.textColor,
-              {fontSize: 9, fontWeight: 'bold', marginBottom: 15},
+              {marginTop: 5, marginBottom: 25, textAlign: 'center'},
             ]}>
-            S T A T I S T I C S
+            {description}
           </Text>
-          <Text>{detail.hp}</Text>
-          <Text>{detail.attack}</Text>
-          <Text>{detail.defense}</Text>
-          <Text>{detail.speed}</Text>
-          <Text>{detail['special-attack']}</Text>
-          <Text>{detail['special-defense']}</Text>
+          <View style={DetailStyle.containerStats}>
+            <View style={DetailStyle.separatorStats}>
+              <View style={DetailStyle.line}></View>
+              <Text
+                style={[
+                  DetailStyle.textColor,
+                  {fontSize: 9, fontWeight: 'bold', margin: 10},
+                ]}>
+                S T A T I S T I C S
+              </Text>
+              <View style={DetailStyle.line}></View>
+            </View>
+            <View style={DetailStyle.charContainerGeneral}>
+              <View style={DetailStyle.chartContainer}>
+                <View style={DetailStyle.chartTextContainer}>
+                  <Text style={DetailStyle.chartText}>
+                    {languageCatalog.HP}
+                  </Text>
+                </View>
+                <ChartBar number={detail.hp} />
+              </View>
+              <View style={DetailStyle.chartContainer}>
+                <View style={DetailStyle.chartTextContainer}>
+                  <Text style={DetailStyle.chartText}>
+                    {languageCatalog.Attack}
+                  </Text>
+                </View>
+                <ChartBar number={detail.attack} />
+              </View>
+              <View style={DetailStyle.chartContainer}>
+                <View style={DetailStyle.chartTextContainer}>
+                  <Text style={DetailStyle.chartText}>
+                    {languageCatalog.Defense}
+                  </Text>
+                </View>
+                <ChartBar number={detail.defense} />
+              </View>
+              <View style={DetailStyle.chartContainer}>
+                <View style={DetailStyle.chartTextContainer}>
+                  <Text style={DetailStyle.chartText}>
+                    {languageCatalog.Speed}
+                  </Text>
+                </View>
+                <ChartBar number={detail.speed} />
+              </View>
+              <View style={DetailStyle.chartContainer}>
+                <View style={DetailStyle.chartTextContainer}>
+                  <Text style={DetailStyle.chartText}>
+                    {languageCatalog.Sp_Atk}
+                  </Text>
+                </View>
+                <ChartBar number={detail['special-attack']} />
+              </View>
+              <View style={DetailStyle.chartContainer}>
+                <View style={DetailStyle.chartTextContainer}>
+                  <Text style={DetailStyle.chartText}>
+                    {languageCatalog.Sp_Def}
+                  </Text>
+                </View>
+                <ChartBar number={detail['special-defense']} />
+              </View>
+            </View>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -33,10 +33,7 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
 
       if (jsonValue !== null) {
         //POKEMONS
-        console.log('Si hay pokemones');
-
         setInitialCatalog(JSON.parse(jsonValue));
-
         setLoading(false);
       } else {
         //NO POKEMONS
