@@ -9,12 +9,6 @@ export default ({navigation}) => {
     <>
       <Search />
       <Catalog navigation={navigation} />
-      {/*
-      <Button
-        title="Presioname"
-        onPress={() => navigation.navigate('Detail')}
-      />
-       */}
     </>
   );
 };

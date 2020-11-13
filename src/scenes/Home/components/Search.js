@@ -21,7 +21,9 @@ const Search = ({languageCatalog, actions}) => {
     }
   };
 
-  return (
+  return typeof languageCatalog == 'undefined' ? (
+    <></>
+  ) : (
     <View style={SearchStyle.container}>
       <View style={SearchStyle.subContainer}>
         <Icon

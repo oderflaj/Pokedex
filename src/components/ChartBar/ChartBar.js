@@ -4,7 +4,7 @@ import {ChartStyle} from './style';
 
 export default ({number}) => {
   const blueSize = `${
-    number > 90 ? (number > 100 ? number - 20 : number - 15) : number - 10
+    number > 90 ? (number > 100 ? 90 : number - 15) : number - 10
   }%`;
   const greySize = `${100 - number - 10}%`;
   return (

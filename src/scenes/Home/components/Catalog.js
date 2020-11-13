@@ -111,7 +111,6 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
         numColumns={3}
         style={CatalogStyle.flatListContainer}
         onScrollEndDrag={() => handleLoadMorePokemons()}
-        onScrollBeginDrag={() => console.log(' *******start')}
         onEndReachedThreshold={0.5}
         ListFooterComponent={() => renderFooter()}
         ListEmptyComponent={() => (
