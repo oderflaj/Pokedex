@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 import {DetailStyle} from './style';
 import {PokeAPI} from '../../services/Services';
@@ -8,6 +8,8 @@ import axios from 'axios';
 
 const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   const pokemon = route.params.pokemon;
+  const [description, setDescription] = useState('');
+  const [detail, setDetail] = useState({});
 
   const getPokemonDescription = async (id) => {
     try {
@@ -32,6 +34,7 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
             );
           });
       }
+
       return description.flavor_text;
     } catch (error) {
       if (axios.isCancel(error)) {
@@ -73,8 +76,8 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
     }
   };
 
-  getPokemonDescription(pokemon.id);
-  getPokemonDetail(pokemon.id);
+  getPokemonDescription(pokemon.id).then((result) => setDescription(result));
+  getPokemonDetail(pokemon.id).then((result) => setDetail(result));
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -85,6 +88,7 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   return (
     <View style={DetailStyle.container}>
       <Text>Detalle</Text>
+      <Text>{description}</Text>
     </View>
   );
 };

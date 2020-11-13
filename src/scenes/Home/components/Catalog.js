@@ -48,6 +48,12 @@ const Catalog = ({searchItem, navigation}) => {
     }
   };
 
+  //Get Data for details
+  /*
+  if (initialCatalog.length > 0) {
+    Service.getDataDetails(initialCatalog);
+  }*/
+
   const getMessage = () => {
     return <Message type={'error'} message={message} />;
   };
