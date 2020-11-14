@@ -1,10 +1,12 @@
 import React, {useState, useLayoutEffect, useRef} from 'react';
-import {View, Text, Image, ScrollView} from 'react-native';
+import {View, Text, Image, ScrollView, Alert} from 'react-native';
 import {DetailStyle} from './style';
-import {PokeAPI} from '../../services/Services';
+import {PokeAPI, isNetworkAvailable} from '../../services/Services';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import ChartBar from '../../components/ChartBar/ChartBar';
+import {PokemonDetails} from '../../../assets/PokeDetail';
+import {LanguageCatalog} from '../../services/Settings';
 
 const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   const pokemon = route.params.pokemon;
@@ -42,6 +44,7 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
       if (axios.isCancel(error)) {
         console.log('cancelled');
       } else {
+        Alert.alert(languageCatalog.Not_Found_Description);
         throw error;
       }
     }
@@ -73,6 +76,7 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
       if (axios.isCancel(error)) {
         console.log('cancelled');
       } else {
+        Alert.alert(languageCatalog.Not_Found_Details);
         throw error;
       }
     }
@@ -83,11 +87,21 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
       headerRight: () => <View></View>,
     });
     if (!unmounted.current) {
-      getPokemonDescription(pokemon.id).then((result) => {
-        setDescription(result);
-      });
-      getPokemonDetail(pokemon.id).then((result) => {
-        setDetail(result);
+      isNetworkAvailable().then((isConnected) => {
+        if (isConnected) {
+          getPokemonDescription(pokemon.id).then((result) => {
+            setDescription(result);
+          });
+          getPokemonDetail(pokemon.id).then((result) => {
+            setDetail(result);
+          });
+        } else {
+          let pokeDet = PokemonDetails.find(
+            (pokeDet) => pokeDet.id == pokemon.id,
+          );
+          setDescription(pokeDet.description || '');
+          setDetail(pokeDet.detail);
+        }
       });
     }
     return () => {
@@ -117,12 +131,18 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
               </Text>
               <Text
                 style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
-                <Text style={{fontWeight: 'bold'}}>{`Height: `}</Text>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                  }}>{`${languageCatalog.Height}: `}</Text>
                 {detail.height}m
               </Text>
               <Text
                 style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
-                <Text style={{fontWeight: 'bold'}}>{`Weight: `}</Text>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                  }}>{`${languageCatalog.Weight}: `}</Text>
                 {detail.weight}kg
               </Text>
             </View>
@@ -143,7 +163,7 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
                   DetailStyle.textColor,
                   {fontSize: 9, fontWeight: 'bold', margin: 10},
                 ]}>
-                S T A T I S T I C S
+                {languageCatalog.STATISTICS}
               </Text>
               <View style={DetailStyle.line}></View>
             </View>

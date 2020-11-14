@@ -7,7 +7,7 @@
  */
 
 import React, {useEffect} from 'react';
-import {StatusBar, NativeModules, Platform} from 'react-native';
+import {StatusBar, NativeModules, Platform, NetInfo} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -28,14 +28,12 @@ import {setLanguage} from './src/stores/Languages/actions';
 const Stack = createStackNavigator();
 
 const App: () => React$Node = () => {
-  /*
   const deviceLanguage =
     Platform.OS === 'ios'
       ? NativeModules.SettingsManager.settings.AppleLocale ||
         NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
       : NativeModules.I18nManager.localeIdentifier;
-      */
-  const deviceLanguage = NativeModules.I18nManager.localeIdentifier;
+  //const deviceLanguage = NativeModules.I18nManager.localeIdentifier;
 
   useEffect(() => {
     store.dispatch(setLanguage(deviceLanguage));

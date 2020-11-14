@@ -13,6 +13,9 @@ export const LanguageCatalog = {
     Error: 'Error',
     Information: 'Information',
     Not_Found_Pokemon: 'Not Found Pokemon...',
+    STATISTICS: 'S T A T I S T I C S',
+    Not_Found_Description: 'Not Found Description',
+    Not_Found_Details: 'Not Found Details',
   },
   es_MX: {
     Search: 'Buscar',
@@ -28,6 +31,9 @@ export const LanguageCatalog = {
     Error: 'Error',
     Information: 'Información',
     Not_Found_Pokemon: 'No se encontro Pokemon...',
+    STATISTICS: 'E S T A D I S T I C A S',
+    Not_Found_Description: 'No se encontro Descripción',
+    Not_Found_Details: 'No se encontro Detalles',
   },
 
   es_US: {
@@ -42,8 +48,11 @@ export const LanguageCatalog = {
     Sp_Atk: 'Vel Atq',
     Sp_Def: 'Vel Def',
     Error: 'Error',
-    Information: 'Information',
-    Not_Found_Pokemon: 'Not found Pokemon...',
+    Information: 'Información',
+    Not_Found_Pokemon: 'No se encontro Pokemon...',
+    STATISTICS: 'S T A T I S T I C S',
+    Not_Found_Description: 'No se encontro Descripción',
+    Not_Found_Details: 'No se encontro Detalles',
   },
 
   es_ES: {
@@ -60,5 +69,8 @@ export const LanguageCatalog = {
     Error: 'Error',
     Information: 'Información',
     Not_Found_Pokemon: 'No se encontro Pokemon...',
+    STATISTICS: 'E S T A D I S T I C A S',
+    Not_Found_Description: 'No se encontro Descripción',
+    Not_Found_Details: 'No se encontro Detalles',
   },
 };

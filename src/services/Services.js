@@ -1,6 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import {store} from '../stores/StoreSettings/StoreSttings';
+import NetInfo from '@react-native-community/netinfo';
 
 import * as ActionsCatalog from '../stores/Catalog/actions';
 
@@ -63,4 +64,11 @@ export const getInitialCatalog = async () => {
   } catch (error) {
     throw error;
   }
+};
+
+export const isNetworkAvailable = async () => {
+  console.log('Entra aquiiii');
+  const response = await NetInfo.fetch();
+  console.log(response);
+  return response.isInternetReachable;
 };
