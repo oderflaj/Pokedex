@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as SearchActions from '../../../stores/Catalog/actions';
 
-const Search = ({languageCatalog, actions}) => {
+const SearchAux = ({languageCatalog, actions}) => {
   const [searchText, setSearchText] = useState('');
   const [showClear, setShowClear] = useState(false);
 
@@ -84,7 +84,6 @@ const Search = ({languageCatalog, actions}) => {
     </View>
   );
 };
-
 const mapStateToProps = (state) => ({
   languageCatalog: state.reducerLanguageApp.languageCatalog,
 });
@@ -93,4 +92,5 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(SearchActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+const Search = connect(mapStateToProps, mapDispatchToProps)(SearchAux);
+export default Search;

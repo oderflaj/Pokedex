@@ -1,3 +1,4 @@
+/* global __DEV__X */
 /**
  * @format
  */

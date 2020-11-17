@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChartBar/> Test to render correctly with a value between 0 and 85 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "width": "80%",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#0D69B8",
+          "borderBottomLeftRadius": 3,
+          "borderTopLeftRadius": 3,
+          "height": 7,
+        },
+        Object {
+          "width": "90%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderColor": "#D5D6D7",
+          "borderRadius": 3,
+          "borderWidth": 0.5,
+          "justifyContent": "center",
+          "width": 35,
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 12,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      150
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#DAD7D7",
+          "borderBottomRightRadius": 3,
+          "borderTopRightRadius": 3,
+          "height": 7,
+        },
+        Object {
+          "width": "-60%",
+        },
+      ]
+    }
+  />
+</View>
+`;

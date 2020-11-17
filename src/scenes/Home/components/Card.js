@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {CardStyle} from '../style';
 import {PokeAPI} from '../../../services/Services';
