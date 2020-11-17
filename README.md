@@ -8,3 +8,6 @@ To run the project for android device
 
 To run the project for IOS
 >react-native run-ios
+
+To test the project
+>npm test
