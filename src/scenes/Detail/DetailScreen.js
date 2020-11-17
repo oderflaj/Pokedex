@@ -56,7 +56,7 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
       const source = CancelToken.source();
       const url = PokeAPI.GET_DETAIL.replace('{id}', id);
 
-      let detail = await axios
+      const detail = await axios
         .get(url, {cancelToken: source.token})
         .then((pokemonDetail) => {
           let newPokemonDetail = {
@@ -87,22 +87,26 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
       headerRight: () => <View></View>,
     });
     if (!unmounted.current) {
-      isNetworkAvailable().then((isConnected) => {
-        if (isConnected) {
-          getPokemonDescription(pokemon.id).then((result) => {
-            setDescription(result);
-          });
-          getPokemonDetail(pokemon.id).then((result) => {
-            setDetail(result);
-          });
-        } else {
-          let pokeDet = PokemonDetails.find(
-            (pokeDet) => pokeDet.id == pokemon.id,
-          );
-          setDescription(pokeDet.description || '');
-          setDetail(pokeDet.detail);
-        }
-      });
+      isNetworkAvailable()
+        .then((isConnected) => {
+          if (isConnected) {
+            getPokemonDescription(pokemon.id).then((result) => {
+              setDescription(result);
+            });
+            getPokemonDetail(pokemon.id).then((result) => {
+              setDetail(result);
+            });
+          } else {
+            const pokeDet = PokemonDetails.find(
+              (pokeDet) => pokeDet.id == pokemon.id,
+            );
+            setDescription(pokeDet.description || '');
+            setDetail(pokeDet.detail);
+          }
+        })
+        .catch((error) => {
+          Alert.alert(`${languageCatalog.Error_to_get_Pokemons}:\n${error}`);
+        });
     }
     return () => {
       unmounted.current = true;

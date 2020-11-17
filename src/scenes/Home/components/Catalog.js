@@ -10,7 +10,6 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
   const [loading, setLoading] = useState(true);
   const [initialCatalog, setInitialCatalog] = useState([]);
   const [indexPage, setIndexPage] = useState(Service.PAGINATION);
-  const [loadingPage, setLoadingPage] = useState(false);
 
   useEffect(() => {
     getData();
@@ -37,13 +36,13 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
         }
       }
     } catch (e) {
-      Alert(`${languageCatalog.Error_to_get_Pokemons}:\n${e}`);
+      Alert.alert(`${languageCatalog.Error_to_get_Pokemons}:\n${e}`);
     }
   };
 
   //FlatList Configuration
   const getItems = () => {
-    let search = searchItem.trim().toLowerCase();
+    const search = searchItem.trim().toLowerCase();
     return search.length > 0
       ? initialCatalog.filter((pokemon) => {
           return pokemon.name.toLowerCase().includes(search);
@@ -52,14 +51,12 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
   };
 
   const handleLoadMorePokemons = () => {
-    setLoadingPage(true);
-    let index = indexPage + Service.PAGINATION;
+    const index = indexPage + Service.PAGINATION;
     if (index > initialCatalog.length) {
       setIndexPage(initialCatalog.length - 1);
     } else {
       setIndexPage(index);
     }
-    setLoadingPage(false);
   };
 
   const renderItem = ({item}) => (

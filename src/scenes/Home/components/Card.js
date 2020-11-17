@@ -4,8 +4,6 @@ import {CardStyle} from '../style';
 import {PokeAPI} from '../../../services/Services';
 
 export default ({pokemon, navigation}) => {
-  const [flagImage, setFlagImage] = useState(false);
-
   const urlImage = PokeAPI.GET_IMAGE.replace('{id}', pokemon.id);
 
   return (

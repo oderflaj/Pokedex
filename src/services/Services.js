@@ -34,20 +34,20 @@ export const getCountPokemon = async () => {
 
 export const getInitialCatalog = async () => {
   try {
-    let quantity = await getCountPokemon();
+    const quantity = await getCountPokemon();
 
     let url = PokeAPI.GET_LIST;
     url = url.replace('{before}', '0');
     url = url.replace('{next}', quantity);
 
-    let pokemonsInitial = await axios
+    const pokemonsInitial = await axios
       .get(url)
       .then((result) => {
         return result.data.results;
       })
       .then((pokemons) => {
         return pokemons.map((pokemon) => {
-          let auxId = pokemon.url.split('/');
+          const auxId = pokemon.url.split('/');
           pokemon['id'] = auxId[auxId.length - 2];
           pokemon.name =
             pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
@@ -59,7 +59,6 @@ export const getInitialCatalog = async () => {
     await AsyncStorage.setItem('InitialCalatog', jsonValue);
     AsyncStorage.setItem;
 
-    //console.log(pokemonsInitial);
     return pokemonsInitial;
   } catch (error) {
     throw error;
