@@ -67,8 +67,7 @@ export const getInitialCatalog = async () => {
 };
 
 export const isNetworkAvailable = async () => {
-  console.log('Entra aquiiii');
   const response = await NetInfo.fetch();
-  console.log(response);
+
   return response.isInternetReachable;
 };

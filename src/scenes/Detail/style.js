@@ -10,20 +10,7 @@ export const DetailStyle = new StyleSheet.create({
   containerGeneral: {
     width: '90%',
   },
-  baseInformation: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  containerImage: {},
-  containerText: {},
-  textColor: {
-    color: '#6B6F6F',
-  },
-  containerStats: {
-    alignItems: 'center',
-    marginBottom: 10,
-  },
+
   separatorStats: {
     flexDirection: 'row',
     width: '100%',
@@ -36,7 +23,24 @@ export const DetailStyle = new StyleSheet.create({
     borderColor: '#B0B4B4',
     flex: 1,
   },
-  charContainerGeneral: {},
+
+  textColor: {
+    color: '#6B6F6F',
+  },
+});
+
+export const DescriptionStyle = new StyleSheet.create({
+  baseInformation: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textColor: {
+    color: '#6B6F6F',
+  },
+});
+
+export const StatisticStyle = new StyleSheet.create({
   chartContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

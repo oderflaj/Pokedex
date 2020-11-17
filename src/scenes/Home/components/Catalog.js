@@ -1,34 +1,24 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, ActivityIndicator, FlatList, Text} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CatalogStyle} from '../style';
 import {connect} from 'react-redux';
 import * as Service from '../../../services/Services';
 import Card from './Card';
-import Message from '../../../components/Message/Message';
 
 const Catalog = ({searchItem, navigation, languageCatalog}) => {
   const [loading, setLoading] = useState(true);
   const [initialCatalog, setInitialCatalog] = useState([]);
-  const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState('');
   const [indexPage, setIndexPage] = useState(Service.PAGINATION);
   const [loadingPage, setLoadingPage] = useState(false);
 
-  const unmounted = useRef(false);
-
   useEffect(() => {
     getData();
-    return () => {
-      unmounted.current = true;
-    };
   }, []);
 
   const getData = async () => {
     //AsyncStorage.clear();
     try {
-      if (showMessage) setShowMessage(false);
-
       const jsonValue = await AsyncStorage.getItem('InitialCalatog');
 
       if (jsonValue !== null) {
@@ -47,13 +37,8 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
         }
       }
     } catch (e) {
-      setMessage(e);
-      setShowMessage(true);
+      Alert(`${languageCatalog.Error_to_get_Pokemons}:\n${e}`);
     }
-  };
-
-  const getMessage = () => {
-    return <Message type={'error'} message={message} />;
   };
 
   //FlatList Configuration
@@ -82,7 +67,7 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
   );
 
   const renderFooter = () => {
-    return loadingPage ? (
+    return searchItem.trim().length == 0 && indexPage ? (
       <View style={{width: 30, height: 30, margin: 30}}>
         <ActivityIndicator size="small" color="red" />
       </View>
@@ -91,9 +76,7 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
     );
   };
 
-  return showMessage ? (
-    getMessage()
-  ) : loading ? (
+  return loading ? (
     <View
       style={[
         CatalogStyle.container,
@@ -111,7 +94,7 @@ const Catalog = ({searchItem, navigation, languageCatalog}) => {
         numColumns={3}
         style={CatalogStyle.flatListContainer}
         onScrollEndDrag={() => handleLoadMorePokemons()}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={1.5}
         ListFooterComponent={() => renderFooter()}
         ListEmptyComponent={() => (
           <>

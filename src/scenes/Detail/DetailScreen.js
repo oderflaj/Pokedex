@@ -4,9 +4,9 @@ import {DetailStyle} from './style';
 import {PokeAPI, isNetworkAvailable} from '../../services/Services';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import ChartBar from '../../components/ChartBar/ChartBar';
 import {PokemonDetails} from '../../../assets/PokeDetail';
-import {LanguageCatalog} from '../../services/Settings';
+import Statistic from './components/Statistic';
+import Description from './components/Description';
 
 const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   const pokemon = route.params.pokemon;
@@ -112,49 +112,14 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
   return (
     <ScrollView>
       <View style={DetailStyle.container}>
-        <View style={DetailStyle.containerGeneral}>
-          <View style={DetailStyle.baseInformation}>
-            <View style={DetailStyle.containerImage}>
-              <Image
-                source={{uri: PokeAPI.GET_IMAGE.replace('{id}', pokemon.id)}}
-                style={{width: 120, height: 120}}
-              />
-            </View>
-            <View style={DetailStyle.containerText}>
-              <Text style={[DetailStyle.textColor, {fontSize: 9}]}>
-                {pokemon.id.length < 3
-                  ? '#' + `00${pokemon.id}`.substr(-1 + pokemon.id.length)
-                  : `#${pokemon.id}`}
-              </Text>
-              <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-                {pokemon.name}
-              </Text>
-              <Text
-                style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                  }}>{`${languageCatalog.Height}: `}</Text>
-                {detail.height}m
-              </Text>
-              <Text
-                style={[DetailStyle.textColor, {fontSize: 9, marginTop: 3}]}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                  }}>{`${languageCatalog.Weight}: `}</Text>
-                {detail.weight}kg
-              </Text>
-            </View>
-          </View>
-
-          <Text
-            style={[
-              DetailStyle.textColor,
-              {marginTop: 5, marginBottom: 25, textAlign: 'center'},
-            ]}>
-            {description}
-          </Text>
+        <>
+          <Description
+            id={pokemon.id}
+            name={pokemon.name}
+            height={detail.height}
+            weight={detail.weight}
+            description={description}
+          />
           <View style={DetailStyle.containerStats}>
             <View style={DetailStyle.separatorStats}>
               <View style={DetailStyle.line}></View>
@@ -167,58 +132,34 @@ const DetailScreen = ({navigation, route, language, languageCatalog}) => {
               </Text>
               <View style={DetailStyle.line}></View>
             </View>
-            <View style={DetailStyle.charContainerGeneral}>
-              <View style={DetailStyle.chartContainer}>
-                <View style={DetailStyle.chartTextContainer}>
-                  <Text style={DetailStyle.chartText}>
-                    {languageCatalog.HP}
-                  </Text>
-                </View>
-                <ChartBar number={detail.hp} />
-              </View>
-              <View style={DetailStyle.chartContainer}>
-                <View style={DetailStyle.chartTextContainer}>
-                  <Text style={DetailStyle.chartText}>
-                    {languageCatalog.Attack}
-                  </Text>
-                </View>
-                <ChartBar number={detail.attack} />
-              </View>
-              <View style={DetailStyle.chartContainer}>
-                <View style={DetailStyle.chartTextContainer}>
-                  <Text style={DetailStyle.chartText}>
-                    {languageCatalog.Defense}
-                  </Text>
-                </View>
-                <ChartBar number={detail.defense} />
-              </View>
-              <View style={DetailStyle.chartContainer}>
-                <View style={DetailStyle.chartTextContainer}>
-                  <Text style={DetailStyle.chartText}>
-                    {languageCatalog.Speed}
-                  </Text>
-                </View>
-                <ChartBar number={detail.speed} />
-              </View>
-              <View style={DetailStyle.chartContainer}>
-                <View style={DetailStyle.chartTextContainer}>
-                  <Text style={DetailStyle.chartText}>
-                    {languageCatalog.Sp_Atk}
-                  </Text>
-                </View>
-                <ChartBar number={detail['special-attack']} />
-              </View>
-              <View style={DetailStyle.chartContainer}>
-                <View style={DetailStyle.chartTextContainer}>
-                  <Text style={DetailStyle.chartText}>
-                    {languageCatalog.Sp_Def}
-                  </Text>
-                </View>
-                <ChartBar number={detail['special-defense']} />
-              </View>
-            </View>
+            <>
+              <Statistic
+                detailName={languageCatalog.HP}
+                detailValue={detail.hp}
+              />
+              <Statistic
+                detailName={languageCatalog.Attack}
+                detailValue={detail.attack}
+              />
+              <Statistic
+                detailName={languageCatalog.Defense}
+                detailValue={detail.defense}
+              />
+              <Statistic
+                detailName={languageCatalog.Speed}
+                detailValue={detail.speed}
+              />
+              <Statistic
+                detailName={languageCatalog.Sp_Atk}
+                detailValue={detail['special-attack']}
+              />
+              <Statistic
+                detailName={languageCatalog.Sp_Def}
+                detailValue={detail['special-defense']}
+              />
+            </>
           </View>
-        </View>
+        </>
       </View>
     </ScrollView>
   );

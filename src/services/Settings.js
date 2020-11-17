@@ -16,6 +16,7 @@ export const LanguageCatalog = {
     STATISTICS: 'S T A T I S T I C S',
     Not_Found_Description: 'Not Found Description',
     Not_Found_Details: 'Not Found Details',
+    Error_to_get_Pokemons: 'Error to list the pokemons...',
   },
   es_MX: {
     Search: 'Buscar',
@@ -34,6 +35,7 @@ export const LanguageCatalog = {
     STATISTICS: 'E S T A D I S T I C A S',
     Not_Found_Description: 'No se encontro Descripción',
     Not_Found_Details: 'No se encontro Detalles',
+    Error_to_get_Pokemons: 'Error al listar los pokemones...',
   },
 
   es_US: {
@@ -53,6 +55,7 @@ export const LanguageCatalog = {
     STATISTICS: 'S T A T I S T I C S',
     Not_Found_Description: 'No se encontro Descripción',
     Not_Found_Details: 'No se encontro Detalles',
+    Error_to_get_Pokemons: 'Error al listar los pokemones...',
   },
 
   es_ES: {
@@ -72,5 +75,6 @@ export const LanguageCatalog = {
     STATISTICS: 'E S T A D I S T I C A S',
     Not_Found_Description: 'No se encontro Descripción',
     Not_Found_Details: 'No se encontro Detalles',
+    Error_to_get_Pokemons: 'Error al listar los pokemones...',
   },
 };
